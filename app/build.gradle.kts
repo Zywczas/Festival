@@ -1,3 +1,5 @@
+import com.zywczas.buildutils.Versions
+
 plugins {
   alias(libs.plugins.android.application)
   alias(libs.plugins.kotlin.android)
@@ -6,16 +8,14 @@ plugins {
 
 android {
   namespace = "com.zywczas.festival"
-  compileSdk = 35
+  compileSdk = Versions.COMPILE_SDK
 
   defaultConfig {
     applicationId = "com.zywczas.festival"
-    minSdk = 26
-    targetSdk = 35
-    versionCode = 1
-    versionName = "1.0"
-
-    testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+    minSdk = Versions.MIN_SDK
+    targetSdk = Versions.TARGET_SDK
+    versionCode = Versions.VERSION_CODE
+    versionName = Versions.VERSION_NAME
   }
 
   buildTypes {
@@ -25,11 +25,11 @@ android {
     }
   }
   compileOptions {
-    sourceCompatibility = JavaVersion.VERSION_11
-    targetCompatibility = JavaVersion.VERSION_11
+    sourceCompatibility = Versions.JAVA_VERSION
+    targetCompatibility = Versions.JAVA_VERSION
   }
   kotlinOptions {
-    jvmTarget = "11"
+    jvmTarget = Versions.JVM_TARGET
   }
   buildFeatures {
     compose = true
@@ -39,13 +39,8 @@ android {
 dependencies {
 
   implementation(libs.androidx.core.ktx)
-  implementation(libs.androidx.lifecycle.runtime.ktx)
   implementation(libs.androidx.activity.compose)
 
   implementation(platform(libs.androidx.compose.bom))
   implementation(libs.androidx.ui)
-  implementation(libs.androidx.ui.graphics)
-  implementation(libs.androidx.ui.tooling.preview)
-  implementation(libs.androidx.material3)
-  debugImplementation(libs.androidx.ui.tooling)
 }
