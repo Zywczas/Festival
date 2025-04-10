@@ -21,3 +21,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "Festival"
 include(":app")
+include(":feature_guests_list")
