@@ -44,4 +44,8 @@ dependencies {
 
   implementation(platform(libs.androidx.compose.bom))
   implementation(libs.androidx.ui)
+
+  implementation(platform(libs.koin.bom))
+  implementation(libs.koin.core)
+  implementation(libs.koin.androidx.compose)
 }
