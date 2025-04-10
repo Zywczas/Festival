@@ -1,29 +1,23 @@
 import com.zywczas.buildutils.Versions
 
 plugins {
-  alias(libs.plugins.android.application)
+  alias(libs.plugins.android.library)
   alias(libs.plugins.kotlin.android)
   alias(libs.plugins.kotlin.compose)
-  alias(libs.plugins.kotlin.serialization)
   alias(libs.plugins.detekt)
 }
 
 android {
-  namespace = "com.zywczas.festival"
+  namespace = "com.zywczas.featureguestslist"
   compileSdk = Versions.COMPILE_SDK
 
   defaultConfig {
-    applicationId = "com.zywczas.festival"
     minSdk = Versions.MIN_SDK
-    targetSdk = Versions.TARGET_SDK
-    versionCode = Versions.VERSION_CODE
-    versionName = Versions.VERSION_NAME
   }
 
   buildTypes {
     release {
       isMinifyEnabled = false
-      proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
     }
   }
   compileOptions {
@@ -39,19 +33,18 @@ android {
 }
 
 dependencies {
-  implementation(project(":feature_guests_list"))
 
   implementation(libs.androidx.core.ktx)
-  implementation(libs.androidx.activity.compose)
+  implementation(libs.androidx.lifecycle.runtime.ktx)
 
   implementation(platform(libs.androidx.compose.bom))
+  implementation(libs.androidx.ui.graphics)
   implementation(libs.androidx.ui)
-
-  implementation(libs.androidx.navigation.compose)
+  implementation(libs.androidx.material3)
+  debugImplementation(libs.androidx.ui.tooling.preview)
+  debugImplementation(libs.androidx.ui.tooling)
 
   implementation(platform(libs.koin.bom))
   implementation(libs.koin.core)
-  implementation(libs.koin.androidx.compose)
-
-  implementation(libs.kotlin.serialization.json)
+  implementation(libs.koin.compose.viewmodel)
 }
