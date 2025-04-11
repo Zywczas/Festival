@@ -22,5 +22,7 @@ dependencyResolutionManagement {
 rootProject.name = "Festival"
 include(":app")
 include(":common_compose")
+include(":common_util")
 include(":feature_guests_list")
 include(":network_caller")
+include(":network_guests")

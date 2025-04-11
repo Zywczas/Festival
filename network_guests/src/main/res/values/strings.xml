@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="error_guests_download">Cannot download list of guests</string>
+</resources>
