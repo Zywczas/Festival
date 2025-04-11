@@ -39,6 +39,7 @@ android {
 }
 
 dependencies {
+  implementation(project(":common_compose"))
   implementation(project(":feature_guests_list"))
 
   implementation(libs.androidx.core.ktx)
