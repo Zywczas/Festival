@@ -23,3 +23,4 @@ rootProject.name = "Festival"
 include(":app")
 include(":common_compose")
 include(":feature_guests_list")
+include(":network_caller")
