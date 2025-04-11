@@ -41,6 +41,7 @@ android {
 dependencies {
   implementation(project(":common_compose"))
   implementation(project(":feature_guests_list"))
+  implementation(project(":network_caller"))
 
   implementation(libs.androidx.core.ktx)
   implementation(libs.androidx.activity.compose)

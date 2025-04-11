@@ -10,6 +10,8 @@ koin = "4.0.2"
 navigationCompose = "2.8.6"
 kotlinSerialization = "2.1.20"
 kotlinSerializationJson = "1.8.0"
+okHttp = "4.12.0"
+retrofit = "2.11.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -27,6 +29,10 @@ koin-core = { group = "io.insert-koin", name = "koin-core" }
 koin-compose-viewmodel = { group = "io.insert-koin", name = "koin-compose-viewmodel" }
 koin-androidx-compose = { group = "io.insert-koin", name = "koin-androidx-compose" }
 kotlin-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinSerializationJson" }
+okHttp = { group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okHttp" }
+okHttp-interceptor = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okHttp" }
+retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
+retrofit-gsonConverter = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "retrofit" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
