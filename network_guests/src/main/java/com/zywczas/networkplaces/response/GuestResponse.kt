@@ -2,7 +2,7 @@ package com.zywczas.networkplaces.response
 
 import com.google.gson.annotations.SerializedName
 
-data class GuestsResponse(
+data class GuestResponse(
 
   @SerializedName("name")
   val name: String = "",

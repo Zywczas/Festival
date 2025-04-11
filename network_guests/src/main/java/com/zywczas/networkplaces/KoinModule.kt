@@ -6,7 +6,7 @@ import com.zywczas.networkplaces.usecase.GetGuestsUseCase
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
 
-val guestsModule = module {
+val networkGuestsModule = module {
     single { createRetrofitService<GuestsRetrofitApi>() }
     singleOf(::GetGuestsUseCase)
 }
