@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="zones_title">Zones</string>
+  <string name="zone_literature">literature</string>
+  <string name="zone_comic">comic</string>
+  <string name="zone_movie">movie</string>
+  <string name="zone_cosplay">cosplay</string>
+  <string name="zone_science">science</string>
+  <string name="zone_music">music</string>
+</resources>
