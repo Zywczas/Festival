@@ -6,4 +6,5 @@
   <string name="zone_movie">movie</string>
   <string name="zone_cosplay">cosplay</string>
   <string name="zone_science">science</string>
+  <string name="zone_music">music</string>
 </resources>

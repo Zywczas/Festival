@@ -10,6 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.zywczas.commoncompose.components.BottomBarInsetSpacer
@@ -29,8 +30,8 @@ import org.koin.compose.viewmodel.koinViewModel
 fun GuestsListScreen() {
     val viewModel: GuestsListViewModel = koinViewModel()
     val snackbarHostState = remember { SnackbarHostState() }
-
-    LaunchedEffect(Unit) { viewModel.init() }
+    val context = LocalContext.current.applicationContext
+    LaunchedEffect(Unit) { viewModel.init(context) }
 
     GuestsListScreen(
         guests = viewModel.guests

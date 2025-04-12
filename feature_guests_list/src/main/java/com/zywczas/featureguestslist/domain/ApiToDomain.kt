@@ -18,6 +18,7 @@ private fun getZonesListDescription(zones: List<String>, stringProvider: StringP
         "filmowa" -> R.string.zone_movie
         "naukowa" -> R.string.zone_science
         "cosplay" -> R.string.zone_cosplay
+        "muzyczna" -> R.string.zone_music
         else -> null
     }
 }.fastFilterNotNull()

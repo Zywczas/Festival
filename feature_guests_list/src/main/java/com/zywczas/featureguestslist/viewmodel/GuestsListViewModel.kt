@@ -1,5 +1,6 @@
 package com.zywczas.featureguestslist.viewmodel
 
+import android.content.Context
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -21,14 +22,14 @@ internal class GuestsListViewModel(
     var guests by mutableStateOf<List<Guest>>(emptyList())
         private set
 
-    fun init() {
+    fun init(context: Context) {
         viewModelScope.launch(Dispatchers.IO) {
-            downloadGuestsList()
+            downloadGuestsList(context)
         }
     }
 
-    private suspend fun downloadGuestsList() {
-        when (val result = getGuestsUseCase.get()) {
+    private suspend fun downloadGuestsList(context: Context) {
+        when (val result = getGuestsUseCase.get(context)) {
             is Resource.Success -> guests = result.data.map { it.toDomain(stringProvider) }
             is Resource.Error -> showError(stringProvider.getString(result.message))
         }
