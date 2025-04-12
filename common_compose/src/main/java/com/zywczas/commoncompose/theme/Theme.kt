@@ -72,6 +72,13 @@ private val typography = Typography(
         lineHeight = 24.sp,
         letterSpacing = 0.5.sp,
     ),
+    bodyMedium = TextStyle(
+        fontFamily = FontFamily.Default,
+        fontWeight = FontWeight.Normal,
+        fontSize = 14.sp,
+        lineHeight = 22.sp,
+        letterSpacing = 0.5.sp,
+    ),
     labelMedium = TextStyle(
         fontWeight = FontWeight.Normal,
         fontSize = 20.sp,
