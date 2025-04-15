@@ -35,19 +35,25 @@ internal class GuestsListViewModel(
     private val getGuestsUseCase: GetGuestsUseCase
 ) : BaseViewModel() {
 
+    private val searchQueryFlow = MutableSharedFlow<String>(extraBufferCapacity = 1, onBufferOverflow = BufferOverflow.DROP_OLDEST)
     private var downloadedGuestsList by mutableStateOf<List<Guest>>(emptyList())
     private var searchQuery by mutableStateOf(Chars.EMPTY_STRING)
-    private val searchQueryFlow = MutableSharedFlow<String>(extraBufferCapacity = 1, onBufferOverflow = BufferOverflow.DROP_OLDEST)
+    private var zonesFilter by mutableStateOf<List<Pair<Zone, Boolean>>>(Zone.entries.map { zone -> zone to true })
 
-    var zonesFilter by mutableStateOf<List<BeansViewEntity>>(
-        value = Zone.entries.map { zone ->
-            BeansViewEntity(stringProvider.getString(zone.displayedName), isChecked = true)
+    val beansViewEntity by derivedStateOf<List<BeansViewEntity>> {
+        zonesFilter.map { pair ->
+            BeansViewEntity(stringProvider.getString(pair.first.displayedName), isChecked = pair.second)
         }
-    )
-        private set
+    }
 
-    val guests by derivedStateOf<List<Guest>> {
-        downloadedGuestsList.filter { it.name.contains(searchQuery, ignoreCase = true) }
+    val displayedGuests by derivedStateOf<List<Guest>> {
+        downloadedGuestsList.filter { guest ->
+            val isSearchQueryInGuestName = if (searchQuery.isBlank()) true else guest.name.contains(searchQuery, ignoreCase = true)
+            val areAllZonesSelected = zonesFilter.all { it.second } || zonesFilter.all { it.second.not() }
+            val selectedZones = zonesFilter.filter { it.second }.map { it.first }
+            val isGuestInSelectedZone = guest.zones.any { guestZone -> selectedZones.contains(guestZone) }
+            isSearchQueryInGuestName && (areAllZonesSelected || isGuestInSelectedZone)
+        }
     }
 
     var searchText by mutableStateOf(TextFieldValue())
@@ -69,9 +75,9 @@ internal class GuestsListViewModel(
         val currentFilter = zonesFilter
         zonesFilter = List(currentFilter.size) { index ->
             val currentFilterItem = currentFilter[index]
-            BeansViewEntity(
-                text = currentFilterItem.text,
-                isChecked = if (index == clickedItemIndex) currentFilterItem.isChecked.not() else currentFilterItem.isChecked
+            Pair(
+                first = currentFilterItem.first,
+                second = if (index == clickedItemIndex) currentFilterItem.second.not() else currentFilterItem.second
             )
         }
     }

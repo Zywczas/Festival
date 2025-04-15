@@ -40,11 +40,11 @@ fun GuestsListScreen() {
     LaunchedEffect(Unit) { viewModel.init(context) }
 
     GuestsListScreen(
-        guests = viewModel.guests,
+        guests = viewModel.displayedGuests,
         searchText = viewModel.searchText,
         onSearchTextChanged = viewModel::onSearchTextChanged,
         onZoneFilterClick = viewModel::onZoneFilterClick,
-        zonesFilter = viewModel.zonesFilter
+        beansViewEntity = viewModel.beansViewEntity
     )
 
     Snackbar(snackbarHostState)
@@ -61,7 +61,7 @@ private fun GuestsListScreen(
     guests: List<Guest>,
     searchText: TextFieldValue,
     onSearchTextChanged: (TextFieldValue) -> Unit,
-    zonesFilter: List<BeansViewEntity>,
+    beansViewEntity: List<BeansViewEntity>,
     onZoneFilterClick: (index: Int) -> Unit,
 ) {
     Column {
@@ -78,7 +78,7 @@ private fun GuestsListScreen(
         Spacer(Modifier.height(Spacing.screenComponentsVertical))
 
         BeansGroup(
-            beans = zonesFilter,
+            beans = beansViewEntity,
             onClick = onZoneFilterClick
         )
 
@@ -114,21 +114,21 @@ private fun PreviewGuestsListScreen() {
             guests = listOf(
                 Guest(
                     name = "Vin Diesel",
-                    description = "Zones: cosplay, movie"
+                    description = "Zones: cosplay, movie",
                 ),
                 Guest(
                     name = "Vin Diesel",
-                    description = "Zones: cosplay, movie"
+                    description = "Zones: cosplay, movie",
                 ),
                 Guest(
                     name = "Vin Diesel",
-                    description = "Zones: cosplay, movie"
+                    description = "Zones: cosplay, movie",
                 ),
             ),
             searchText = TextFieldValue("Search guest"),
             onSearchTextChanged = {},
             onZoneFilterClick = {},
-            zonesFilter = listOf(
+            beansViewEntity = listOf(
                 BeansViewEntity("Bean", isChecked = false),
                 BeansViewEntity("Bean", isChecked = true),
                 BeansViewEntity("Bean", isChecked = false),
