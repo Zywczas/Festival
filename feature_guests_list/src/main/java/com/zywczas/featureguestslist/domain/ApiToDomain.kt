@@ -4,22 +4,32 @@ import androidx.compose.ui.util.fastFilterNotNull
 import com.zywczas.commonutil.Chars
 import com.zywczas.commonutil.R
 import com.zywczas.commonutil.StringProvider
+import com.zywczas.commonutil.festivalmodels.Zone
 import com.zywczas.networkplaces.response.GuestResponse
 
-internal fun GuestResponse.toDomain(stringProvider: StringProvider) = Guest(
-    name = name,
-    description = "${stringProvider.getString(R.string.zones_title)}${Chars.COLON}${Chars.SPACE}${getZonesListDescription(zones, stringProvider)}"
-)
+internal fun GuestResponse.toDomain(stringProvider: StringProvider): Guest {
+    val domainZones = getZones(zones)
+    return Guest(
+        name = name,
+        zones = domainZones,
+        description = getDescription(domainZones, stringProvider)
+    )
+}
 
-private fun getZonesListDescription(zones: List<String>, stringProvider: StringProvider): String = zones.map {
+private fun getZones(zones: List<String>): List<Zone> = zones.map {
     when (it) {
-        "literacka" -> R.string.zone_literature
-        "komiksowa" -> R.string.zone_comic
-        "filmowa" -> R.string.zone_movie
-        "naukowa" -> R.string.zone_science
-        "cosplay" -> R.string.zone_cosplay
-        "muzyczna" -> R.string.zone_music
+        "literacka" -> Zone.Literature
+        "komiksowa" -> Zone.Comic
+        "filmowa" -> Zone.Movie
+        "naukowa" -> Zone.Science
+        "cosplay" -> Zone.Cosplay
+        "muzyczna" -> Zone.Music
         else -> null
     }
 }.fastFilterNotNull()
-    .joinToString { stringProvider.getString(it) }
+
+private fun getDescription(zones: List<Zone>, stringProvider: StringProvider): String =
+    stringProvider.getString(R.string.zones_title) +
+            Chars.COLON +
+            Chars.SPACE +
+            zones.joinToString { stringProvider.getString(it.displayedName) }

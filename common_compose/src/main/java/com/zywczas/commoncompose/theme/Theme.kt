@@ -50,18 +50,14 @@ object Theme {
     }
 }
 
-private val DarkColorScheme = darkColorScheme(
-    primary = Color.PrimaryLight,
-    secondary = Color.PurpleGrey80,
-    tertiary = Color.Pink80
-)
+private val DarkColorScheme = darkColorScheme()
 
 private val LightColorScheme = lightColorScheme(
     primary = Color.PrimaryLight,
-    secondary = Color.PurpleGrey40,
-    tertiary = Color.Pink40,
     // bottom sheet
-    surfaceContainerLow = Color.ScreenBackground
+    surfaceContainerLow = Color.ScreenBackground,
+    surface = Color.PrimaryLight.copy(alpha = 0.5f),
+    onBackground = Color.BlueText
 )
 
 private val typography = Typography(
@@ -78,6 +74,12 @@ private val typography = Typography(
         fontSize = 14.sp,
         lineHeight = 22.sp,
         letterSpacing = 0.5.sp,
+    ),
+    labelSmall = TextStyle(
+        fontWeight = FontWeight.Normal,
+        fontSize = 18.sp,
+        letterSpacing = 0.5.sp,
+        lineHeight = 20.sp,
     ),
     labelMedium = TextStyle(
         fontWeight = FontWeight.Normal,

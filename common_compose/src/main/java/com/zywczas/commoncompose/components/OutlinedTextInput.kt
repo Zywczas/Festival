@@ -1,6 +1,7 @@
 package com.zywczas.commoncompose.components
 
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -18,7 +19,7 @@ fun OutlinedTextInput(
     OutlinedTextField(
         value = value,
         onValueChange = onValueChange,
-        label = hint?.let { { Text(hint) } },
+        label = hint?.let { { Text(hint, color = MaterialTheme.colorScheme.onBackground) } },
         modifier = Modifier.fillMaxWidth(),
     )
 }
