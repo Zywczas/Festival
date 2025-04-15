@@ -7,11 +7,13 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.lifecycle.viewModelScope
+import com.zywczas.commoncompose.components.BeansViewEntity
 import com.zywczas.commonutil.BaseViewModel
 import com.zywczas.commonutil.Chars
 import com.zywczas.commonutil.Constants
 import com.zywczas.commonutil.Resource
 import com.zywczas.commonutil.StringProvider
+import com.zywczas.commonutil.festivalmodels.Zone
 import com.zywczas.commonutil.logD
 import com.zywczas.featureguestslist.domain.Guest
 import com.zywczas.featureguestslist.domain.toDomain
@@ -37,6 +39,13 @@ internal class GuestsListViewModel(
     private var searchQuery by mutableStateOf(Chars.EMPTY_STRING)
     private val searchQueryFlow = MutableSharedFlow<String>(extraBufferCapacity = 1, onBufferOverflow = BufferOverflow.DROP_OLDEST)
 
+    var zonesFilter by mutableStateOf<List<BeansViewEntity>>(
+        value = Zone.entries.map { zone ->
+            BeansViewEntity(stringProvider.getString(zone.displayedName), isChecked = true)
+        }
+    )
+        private set
+
     val guests by derivedStateOf<List<Guest>> {
         downloadedGuestsList.filter { it.name.contains(searchQuery, ignoreCase = true) }
     }
@@ -54,6 +63,17 @@ internal class GuestsListViewModel(
     fun onSearchTextChanged(textFieldValue: TextFieldValue) {
         searchText = textFieldValue
         searchQueryFlow.tryEmit(textFieldValue.text)
+    }
+
+    fun onZoneFilterClick(clickedItemIndex: Int) {
+        val currentFilter = zonesFilter
+        zonesFilter = List(currentFilter.size) { index ->
+            val currentFilterItem = currentFilter[index]
+            BeansViewEntity(
+                text = currentFilterItem.text,
+                isChecked = if (index == clickedItemIndex) currentFilterItem.isChecked.not() else currentFilterItem.isChecked
+            )
+        }
     }
 
     private suspend fun downloadGuestsList(context: Context) {

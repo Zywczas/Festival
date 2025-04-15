@@ -16,6 +16,8 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
+import com.zywczas.commoncompose.components.BeansGroup
+import com.zywczas.commoncompose.components.BeansViewEntity
 import com.zywczas.commoncompose.components.BottomBarInsetSpacer
 import com.zywczas.commoncompose.components.GuestListItem
 import com.zywczas.commoncompose.components.HorizontalListItemDivider
@@ -40,7 +42,9 @@ fun GuestsListScreen() {
     GuestsListScreen(
         guests = viewModel.guests,
         searchText = viewModel.searchText,
-        onSearchTextChanged = viewModel::onSearchTextChanged
+        onSearchTextChanged = viewModel::onSearchTextChanged,
+        onZoneFilterClick = viewModel::onZoneFilterClick,
+        zonesFilter = viewModel.zonesFilter
     )
 
     Snackbar(snackbarHostState)
@@ -56,7 +60,9 @@ fun GuestsListScreen() {
 private fun GuestsListScreen(
     guests: List<Guest>,
     searchText: TextFieldValue,
-    onSearchTextChanged: (TextFieldValue) -> Unit
+    onSearchTextChanged: (TextFieldValue) -> Unit,
+    zonesFilter: List<BeansViewEntity>,
+    onZoneFilterClick: (index: Int) -> Unit,
 ) {
     Column {
         Toolbar(stringResource(R.string.guests_list_title))
@@ -68,6 +74,13 @@ private fun GuestsListScreen(
                 onValueChange = onSearchTextChanged
             )
         }
+
+        Spacer(Modifier.height(Spacing.screenComponentsVertical))
+
+        BeansGroup(
+            beans = zonesFilter,
+            onClick = onZoneFilterClick
+        )
 
         Spacer(Modifier.height(Spacing.screenComponentsVertical))
 
@@ -113,7 +126,14 @@ private fun PreviewGuestsListScreen() {
                 ),
             ),
             searchText = TextFieldValue("Search guest"),
-            onSearchTextChanged = {}
+            onSearchTextChanged = {},
+            onZoneFilterClick = {},
+            zonesFilter = listOf(
+                BeansViewEntity("Bean", isChecked = false),
+                BeansViewEntity("Bean", isChecked = true),
+                BeansViewEntity("Bean", isChecked = false),
+                BeansViewEntity("Bean", isChecked = true),
+            ),
         )
     }
 }
