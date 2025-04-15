@@ -15,4 +15,4 @@ The app contains following screens:
 
 |                        Guests List: you can check who is coming to the festival                         |
 |:-------------------------------------------------------------------------------------------------------:|
-| <img src="https://github.com/user-attachments/assets/6f403e9a-2c23-4de2-9105-d3df6b99ecac" width="300"> |
+| <img src="https://github.com/user-attachments/assets/e72119d6-ecc2-4472-b156-681e89bda208" width="300"> |
