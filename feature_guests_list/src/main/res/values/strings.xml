@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <string name="guests_list_title">Guests List</string>
+  <string name="search_guest">Search guest</string>
 </resources>
